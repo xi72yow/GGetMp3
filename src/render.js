@@ -4,11 +4,23 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
+let durationAlert = 500;
 let currentProcess = false;
+
+function tempAlert(msg, duration) {
+    var el = document.createElement("div");
+    el.setAttribute("style", "position:absolute;top:5%;left:5%;background-color:white;");
+    el.innerHTML = msg;
+    setTimeout(function () {
+        el.parentNode.removeChild(el);
+    }, duration);
+    document.body.appendChild(el);
+}
 
 function onError(err) {
     currentProcess = false;
     alert("Error:" + err);
+    toggleLoading();
 }
 
 function toggleLoading(id) {
@@ -56,6 +68,7 @@ async function getMp3fromYTURL(url) {
             "comment": info.videoDetails.video_url,
             "genre": info.videoDetails.category,
         }
+        tempAlert(JSON.stringify(titleData), durationAlert);
         console.log(titleData);
 
         // stringify Object
@@ -64,9 +77,10 @@ async function getMp3fromYTURL(url) {
         fs.writeFile("temp/" + folder + "/output.json", jsonContent, 'utf8', function (err) {
             if (err) {
                 console.log("An error occured while writing JSON Object to File.");
+                tempAlert("An error occured while writing JSON Object to File.", durationAlert);
                 return console.log(err);
             }
-
+            tempAlert("JSON file has been saved.", durationAlert);
             console.log("JSON file has been saved.");
         });
 
@@ -77,9 +91,11 @@ async function getMp3fromYTURL(url) {
             .output(output)
             .on('end', function () {
                 console.log('conversion ended');
+                tempAlert("conversion ended", durationAlert);
                 callback(null);
             }).on('error', function (err) {
                 console.log('error: ', err.code, err.msg);
+                tempAlert("convert error", durationAlert);
                 callback(err);
             }).run();
     }
@@ -88,6 +104,7 @@ async function getMp3fromYTURL(url) {
         request.head(uri, function (err, res, body) {
             console.log('content-type:', res.headers['content-type']);
             console.log('content-length:', res.headers['content-length']);
+            tempAlert("requested: " + res.headers['content-type'], durationAlert);
 
             request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
         });
@@ -100,10 +117,12 @@ async function getMp3fromYTURL(url) {
     vidStream.on('finish', function () {
 
         console.log('file done');
+        tempAlert('file done', durationAlert);
 
         convert("temp/" + folder + '/myvideo.mp4', 'extract/' + titleData.title + '.mp3', function (err) {
             if (!err) {
                 console.log('conversion complete');
+                tempAlert('conversion complete', durationAlert);
                 download(titleData.thumbnail, "temp/" + folder + '/cover.webp', function (err) {
                     if (!err) {
                         convert("temp/" + folder + '/cover.webp', "temp/" + folder + '/x.png', function (err) {
@@ -120,6 +139,8 @@ async function getMp3fromYTURL(url) {
 
                                 const success = NodeID3.write(tags, './extract/' + titleData.title + '.mp3');
                                 console.log("sucess: " + success);
+                                tempAlert('id3 tag state: ' + success, durationAlert);
+
                                 toggleLoading("loading");
                                 shell.openPath('./extract');
                                 currentProcess = false;
@@ -167,7 +188,7 @@ function processInput() {
         return;
     }
     else {
-
+        alert("current process... please wait")
     }
 
 }

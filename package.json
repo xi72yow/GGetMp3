@@ -2,14 +2,15 @@
   "name": "ggetmp3",
   "productName": "ggetmp3",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "get id3 tagged mp3 from YT",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "echo \"No linting configured\"",
+    "linux": "electron-builder --linux"
   },
   "keywords": [],
   "author": {
@@ -47,7 +48,9 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "fluent-ffmpeg": "^2.1.2",
+    "fs": "0.0.1-security",
     "node-id3": "^0.2.3",
+    "path": "^0.12.7",
     "request": "^2.88.2",
     "ytdl-core": "^4.8.2"
   },
@@ -57,6 +60,18 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.57",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "13.1.1"
+    "electron": "13.1.1",
+    "electron-builder": "^22.10.5"
+  },
+  "build": {
+    "appId": "com.ggetmp3.app",
+    "productName": "GGetMp3",
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "icon": "./build/512x512.png",
+      "category": "Utillity"
+    }
   }
 }

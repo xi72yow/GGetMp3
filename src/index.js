@@ -15,8 +15,10 @@ const createWindow = () => {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    icon: 'src/ggmp3.png',
-  });
+    icon: path.join(__dirname, 'build', '512x512.ico')
+  }
+
+  );
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));

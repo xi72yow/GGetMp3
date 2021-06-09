@@ -90,3 +90,6 @@ out/
 
 temp/
 extract/
+dist/linux-unpacked/
+dist/builder-debug.yml
+dist/builder-effective-config.yaml
