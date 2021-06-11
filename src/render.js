@@ -48,10 +48,11 @@ let currentProcess = false;
 async function sendInputToMain() {
 
     let url = document.getElementById('input-url').value;
+    let valid = /^((?:https?:)?\/\/)?((?:www|m|music)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
 
     if (!currentProcess) {
 
-        if (!url == "") {
+        if (valid.test(url)) {
             //toggleLoading("loading");
             currentProcess = true;
 
@@ -84,6 +85,7 @@ ipcRenderer.on('job-done-err', function (event, err) {
     xAlerts.send(err, "prime", 2000);
     console.log(err);
 });
+
 ipcRenderer.on('job-done-success', function (event, msg) {
     currentProcess = false;
     xAlerts.send(msg, "dark", 2000);

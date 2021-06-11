@@ -33,6 +33,7 @@ input {
   border-style: none;
   background: transparent;
   outline: none;
+  padding-right: 1rem;
 }
 
 .wrapper {

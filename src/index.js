@@ -2,8 +2,6 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 let mainWindow = null;
 
-if(require('electron-squirrel-startup')) return;
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -73,7 +71,7 @@ function getYear(crazySyle) {
   return crazySyle.split('-')[0];
 }
 
-async function getMp3fromYTURL(url) {
+function getMp3fromYTURL(url) {
 
   let folder = new Date().toString();
 
@@ -94,7 +92,7 @@ async function getMp3fromYTURL(url) {
   video.on('info', function (info) {
 
     titleData = {
-      "title": info.videoDetails.title.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''),
+      "title": info.videoDetails.title.replace(/[` ~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''),
       "author": info.videoDetails.author.name,
       "album": info.videoDetails.keywords[0],
       "year": getYear(info.videoDetails.publishDate),
