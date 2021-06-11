@@ -1,7 +1,7 @@
 {
   "name": "ggetmp3",
   "productName": "ggetmp3",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "get id3 tagged mp3 from YT",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
-    "linux": "electron-builder --linux"
+    "linux": "electron-builder --linux",
+    "make-mac": "npx @electron-forge/cli make --platform darwin"
   },
   "keywords": [],
   "author": {
@@ -20,7 +21,9 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./src/assets/512x512"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -60,8 +63,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.57",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
     "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "13.1.1",
-    "electron-builder": "^22.10.5"
+    "electron": "13.1.1"
   },
   "build": {
     "appId": "com.ggetmp3.app",
