@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 let mainWindow = null;
 
+if(require('electron-squirrel-startup')) return;
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -10,16 +12,16 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1500,
+    width: 900,
     height: 500,
     title: "GGetMp3",
     webPreferences: {
       worldSafeExecuteJavaScript: true,
       contextIsolation: false,
-      nodeIntegration: true
-      //preload: path.join(app.getAppPath(), 'preload.js')
+      nodeIntegration: true,
+      //preload: path.join(app.getAppPath(), 'preload.js'),
+      icon: path.join(app.getAppPath(), 'src/assets/512x512.png'),
     },
-    icon: path.join(__dirname, 'build', '512x512.ico')
   }
 
   );
@@ -28,7 +30,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // remove the menue
   mainWindow.removeMenu()

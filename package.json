@@ -11,7 +11,9 @@
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\"",
     "linux": "electron-builder --linux",
-    "make-mac": "npx @electron-forge/cli make --platform darwin"
+    "make-mac": "npx electron-forge/cli make --platform darwin",
+    "make-linux": "npx electron-forge/cli make --platform linux --targets deb",
+    "make-win": "npx electron-forge/cli make --platform win --targets exe"
   },
   "keywords": [],
   "author": {
@@ -72,7 +74,7 @@
       "target": [
         "deb"
       ],
-      "icon": "./build/512x512.png",
+      "icon": "./src/assets/512x512.png",
       "category": "Utillity"
     }
   }
