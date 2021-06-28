@@ -1,8 +1,9 @@
 {
   "name": "ggetmp3",
   "productName": "ggetmp3",
-  "version": "2.0.0",
-  "description": "get id3 tagged mp3 from YT",
+  "version": "2.0.2",
+  "description": "get id3 tagged mp3 from YT-URL",
+  "homepage": "xi72yow.de",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -12,13 +13,8 @@
     "lint": "echo \"No linting configured\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "linux": "electron-builder -linux",
     "win": "electron-builder -w",
-    "wl": "electron-builder -wl",
-    "make-mac": "npx electron-forge/cli make --platform darwin",
-    "make-linux": "npx electron-forge/cli make --platform linux --targets deb",
-    "packa": "npx electron-forge/cli make --platform win --targets exe",
-    "make-win": "npx electron-packager . GGetMp3 --platform=darwin,linux,win32 --arch=ia32,x64 --icon=src/assets"
+    "wl": "electron-builder -wl"
   },
   "keywords": [],
   "author": {
@@ -64,22 +60,18 @@
     "node-id3": "^0.2.3",
     "path": "^0.12.7",
     "request": "^2.88.2",
-    "ytdl-core": "^4.8.2"
+    "ytdl-core": "^4.8.3"
   },
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.57",
-    "@electron-forge/maker-deb": "^6.0.0-beta.57",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.57",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
-    "@electron-forge/maker-zip": "^6.0.0-beta.57",
-    "electron": "13.1.1",
-    "electron-builder": "^22.11.7"
+    "electron-builder": "^22.11.7",
+    "electron": "13.1.1"
   },
   "build": {
-    "appId": "com.ggetmp3.app",
+    "appId": "com.electron.ggetmp3",
     "productName": "GGetMp3",
     "linux": {
       "target": [
+        "AppImage",
         "deb"
       ],
       "icon": "./src/assets/512x512.png",

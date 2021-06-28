@@ -134,6 +134,7 @@ function getMp3fromYTURL(url) {
 
   function download(uri, filename, callback) {
     request.head(uri, function (err, res, body) {
+      console.log(err);
       console.log('content-type:', res.headers['content-type']);
       console.log('content-length:', res.headers['content-length']);
       onNotify("requested: " + res.headers['content-type']);
