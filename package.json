@@ -60,11 +60,12 @@
     "node-id3": "^0.2.3",
     "path": "^0.12.7",
     "request": "^2.88.2",
-    "ytdl-core": "^4.8.3"
+    "ytdl-core": "^4.11.0"
   },
   "devDependencies": {
-    "electron-builder": "^22.11.7",
-    "electron": "13.1.1"
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "electron": "13.1.1",
+    "electron-builder": "^22.14.13"
   },
   "build": {
     "appId": "com.electron.ggetmp3",
